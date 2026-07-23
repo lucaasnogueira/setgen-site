@@ -8,10 +8,8 @@ export default function DiffRow({ index, title, desc }) {
   return (
     <div
       ref={ref}
+      className="diff-row"
       style={{
-        display: "grid",
-        gridTemplateColumns: "60px 1fr 1.4fr",
-        gap: 32,
         alignItems: "baseline",
         padding: "28px 0",
         borderTop: "1px solid rgba(255,255,255,0.08)",

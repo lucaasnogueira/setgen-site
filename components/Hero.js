@@ -19,7 +19,7 @@ export default function Hero() {
         }}
       />
 
-      <div style={{ position: "relative", zIndex: 2, maxWidth: 1280, margin: "0 auto", padding: "140px 48px 120px", width: "100%" }}>
+      <div style={{ position: "relative", zIndex: 2, maxWidth: 1280, margin: "0 auto", padding: "140px var(--pad-x) 120px", width: "100%" }}>
         <h1
           style={{
             fontFamily: "var(--font-space-grotesk), sans-serif",

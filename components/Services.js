@@ -11,12 +11,12 @@ export default function Services() {
   const activeSvc = { ...SERVICES[activeService], indexLabel: String(activeService + 1).padStart(2, "0") };
 
   return (
-    <section id="servicos" ref={headerRef} style={{ padding: "140px 48px", maxWidth: 1280, margin: "0 auto" }}>
+    <section id="servicos" ref={headerRef} style={{ padding: "140px var(--pad-x)", maxWidth: 1280, margin: "0 auto" }}>
       <div style={{ ...revealStyle(headerRevealed), marginBottom: 64, maxWidth: 620 }}>
         <span style={eyebrowStyle}>Serviços</span>
         <h2 style={{ ...sectionTitleStyle, fontSize: "clamp(28px,3.4vw,40px)" }}>Soluções completas em energia, do projeto à operação.</h2>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "400px 1fr", gap: 64, alignItems: "start" }}>
+      <div className="grid-services" style={{ alignItems: "start" }}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           {SERVICES.map((svc, i) => (
             <div

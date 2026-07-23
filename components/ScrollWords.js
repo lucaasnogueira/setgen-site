@@ -7,7 +7,7 @@ export default function ScrollWords() {
   const [wordRefs, activeIndex] = useActiveWordOnScroll(SCROLL_WORDS.length);
 
   return (
-    <section style={{ padding: "100px 48px 60px", maxWidth: 1280, margin: "0 auto", textAlign: "center" }}>
+    <section style={{ padding: "100px var(--pad-x) 60px", maxWidth: 1280, margin: "0 auto", textAlign: "center" }}>
       <span
         style={{
           fontFamily: "var(--font-space-grotesk), sans-serif",

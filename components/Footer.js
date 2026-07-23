@@ -4,8 +4,8 @@ import { InstagramMark, WhatsappMark, EmailMark } from "@/components/icons";
 
 export default function Footer() {
   return (
-    <footer style={{ padding: "80px 48px 32px", borderTop: "1px solid rgba(255,255,255,0.06)", background: "#0a0b0d" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: 48 }}>
+    <footer style={{ padding: "80px var(--pad-x) 32px", borderTop: "1px solid rgba(255,255,255,0.06)", background: "#0a0b0d" }}>
+      <div className="footer-grid" style={{ maxWidth: 1280, margin: "0 auto" }}>
         <div>
           <div style={{ marginBottom: 16 }}>
             <img src="/assets/logo-setgen.png" alt="SETGEN" style={{ height: 64, width: "auto", objectFit: "contain" }} />

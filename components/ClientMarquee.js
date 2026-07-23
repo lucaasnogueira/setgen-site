@@ -4,7 +4,7 @@ import { eyebrowStyle } from "@/lib/styles";
 export default function ClientMarquee() {
   return (
     <section style={{ padding: "100px 0", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", overflow: "hidden" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto 40px", padding: "0 48px", textAlign: "center" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto 40px", padding: "0 var(--pad-x)", textAlign: "center" }}>
         <span style={eyebrowStyle}>Confiança de mais de 400 clientes</span>
       </div>
       <div

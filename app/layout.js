@@ -19,6 +19,11 @@ export const metadata = {
     "Engenharia elétrica, grupos geradores e soluções completas em energia para manter o seu negócio funcionando 24 horas por dia.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR" className={`${spaceGrotesk.variable} ${inter.variable}`} suppressHydrationWarning>

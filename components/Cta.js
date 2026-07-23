@@ -8,7 +8,7 @@ export default function Cta() {
   const [ref, revealed] = useRevealOnScroll();
 
   return (
-    <section id="contato" ref={ref} style={{ position: "relative", padding: "160px 48px", textAlign: "center", overflow: "hidden" }}>
+    <section id="contato" ref={ref} style={{ position: "relative", padding: "160px var(--pad-x)", textAlign: "center", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 50% 40%, rgba(226,102,29,0.14), transparent 60%)" }} />
       <div style={{ ...revealStyle(revealed), position: "relative", maxWidth: 760, margin: "0 auto" }}>
         <h2 style={{ fontFamily: "var(--font-space-grotesk), sans-serif", fontSize: "clamp(32px,5vw,58px)", fontWeight: 700, letterSpacing: "-1px", margin: "0 0 26px" }}>

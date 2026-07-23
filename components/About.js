@@ -12,19 +12,12 @@ export default function About() {
       ref={ref}
       style={{
         position: "relative",
-        padding: "160px 48px",
+        padding: "160px var(--pad-x)",
         maxWidth: 1280,
         margin: "0 auto",
       }}
     >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 80,
-          alignItems: "center",
-        }}
-      >
+      <div className="grid-2" style={{ alignItems: "center" }}>
         <div style={revealStyle(revealed)}>
           <span style={eyebrowStyle}>Sobre a SETGEN</span>
           <h2 style={sectionTitleStyle}>

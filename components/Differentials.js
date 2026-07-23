@@ -9,7 +9,7 @@ export default function Differentials() {
   const [ref, revealed] = useRevealOnScroll();
 
   return (
-    <section id="diferenciais" ref={ref} style={{ padding: "140px 48px", maxWidth: 1280, margin: "0 auto" }}>
+    <section id="diferenciais" ref={ref} style={{ padding: "140px var(--pad-x)", maxWidth: 1280, margin: "0 auto" }}>
       <div style={{ ...revealStyle(revealed), marginBottom: 64, maxWidth: 620 }}>
         <span style={eyebrowStyle}>Diferenciais</span>
         <h2 style={{ ...sectionTitleStyle, fontSize: "clamp(28px,3.4vw,40px)" }}>Por que grandes operações confiam na SETGEN.</h2>

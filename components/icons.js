@@ -11,6 +11,25 @@ export function WhatsappMark() {
   return <div style={{ width: 16, height: 16, borderRadius: "50% 50% 50% 4px", border: "1.5px solid #b8bcc2" }} />;
 }
 
+export function MenuMark() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 5, width: 22 }}>
+      <div style={{ height: 2, width: "100%", background: "#e9ebee", borderRadius: 2 }} />
+      <div style={{ height: 2, width: "100%", background: "#e9ebee", borderRadius: 2 }} />
+      <div style={{ height: 2, width: "100%", background: "#e9ebee", borderRadius: 2 }} />
+    </div>
+  );
+}
+
+export function CloseMark() {
+  return (
+    <div style={{ position: "relative", width: 20, height: 20 }}>
+      <div style={{ position: "absolute", top: 9, left: 0, width: "100%", height: 2, background: "#e9ebee", borderRadius: 2, transform: "rotate(45deg)" }} />
+      <div style={{ position: "absolute", top: 9, left: 0, width: "100%", height: 2, background: "#e9ebee", borderRadius: 2, transform: "rotate(-45deg)" }} />
+    </div>
+  );
+}
+
 export function EmailMark() {
   return (
     <div style={{ width: 17, height: 12, border: "1.5px solid #b8bcc2", borderRadius: 2, position: "relative", overflow: "hidden" }}>

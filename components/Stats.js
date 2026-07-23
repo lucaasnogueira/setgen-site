@@ -10,7 +10,7 @@ export default function Stats() {
   const values = useCountUp(STATS.map((s) => s.target), revealed);
 
   return (
-    <section ref={ref} style={{ padding: "120px 48px", background: "linear-gradient(180deg,#0b0c0e,#0e1013)", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+    <section ref={ref} style={{ padding: "120px var(--pad-x)", background: "linear-gradient(180deg,#0b0c0e,#0e1013)", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
       <div style={{ ...revealStyle(revealed), maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px,1fr))", gap: 40, textAlign: "center" }}>
         {STATS.map((s, i) => (
           <div key={s.label}>
