@@ -1,4 +1,4 @@
-import { WHATSAPP_URL } from "@/data/content";
+import { WHATSAPP_URL, PHONE_NUMBER } from "@/data/content";
 import { footerHeadingStyle, footerLinkStyle, socialIconStyle } from "@/lib/styles";
 import { InstagramMark, WhatsappMark, EmailMark } from "@/components/icons";
 
@@ -27,7 +27,8 @@ export default function Footer() {
           <h4 style={footerHeadingStyle}>Contato</h4>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <a href="mailto:comercial@setgen.com.br" style={footerLinkStyle}>comercial@setgen.com.br</a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener" style={footerLinkStyle}>(92) 99299-9999 — WhatsApp</a>
+            <a href="tel:+559232480809" style={footerLinkStyle}>{PHONE_NUMBER}</a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener" style={footerLinkStyle}>(92) 98592-6760 — WhatsApp</a>
             <span style={{ color: "#75797f", fontSize: 14 }}>R. Secundária 7, 115 - Nova Cidade, Manaus - AM</span>
           </div>
         </div>

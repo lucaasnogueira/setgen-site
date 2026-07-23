@@ -105,7 +105,9 @@ export const DIFFS = [
 ];
 
 export const WHATSAPP_URL =
-  "https://wa.me/5592992999999?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento";
+  "https://wa.me/5592985926760?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento";
+
+export const PHONE_NUMBER = "(92) 3248-0809";
 
 export const STATS = [
   { target: 5000, prefix: "+", suffix: "", label: "Manutenções realizadas" },
