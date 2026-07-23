@@ -1,0 +1,1363 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap"
+          rel="stylesheet"
+        />
+        <style>
+          html {
+            scroll-behavior: smooth;
+            background: #08090b;
+          }
+          body {
+            margin: 0;
+            background: #08090b;
+          }
+          ::selection {
+            background: rgba(226, 102, 29, 0.35);
+            color: #fff;
+          }
+          @keyframes pulseDot {
+            0%,
+            100% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            50% {
+              opacity: 0.4;
+              transform: scale(0.7);
+            }
+          }
+          @keyframes floatY {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-8px);
+            }
+          }
+          @keyframes scrollLine {
+            0% {
+              transform: translateY(-100%);
+            }
+            100% {
+              transform: translateY(200%);
+            }
+          }
+          @keyframes marqueeScroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          @keyframes wordFocus {
+            0% {
+              opacity: 0.18;
+              transform: scale(0.82);
+              color: #3a3d42;
+              text-shadow: none;
+            }
+            40% {
+              opacity: 1;
+              transform: scale(1);
+              color: #e2661d;
+              text-shadow: 0 0 44px rgba(226, 102, 29, 0.45);
+            }
+            60% {
+              opacity: 1;
+              transform: scale(1);
+              color: #e2661d;
+              text-shadow: 0 0 44px rgba(226, 102, 29, 0.45);
+            }
+            100% {
+              opacity: 0.18;
+              transform: scale(0.82);
+              color: #3a3d42;
+              text-shadow: none;
+            }
+          }
+          @keyframes diffRowReveal {
+            0% {
+              opacity: 0;
+              transform: translateY(32px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @supports (animation-timeline: view()) {
+            [data-view="word"] {
+              animation: wordFocus linear both;
+              animation-timeline: view();
+              animation-range: cover 0% cover 100%;
+            }
+            [data-view="diffrow"] {
+              animation: diffRowReveal linear both;
+              animation-timeline: view();
+              animation-range: cover 0% cover 35%;
+            }
+          }
+        </style>
+      </helmet>
+
+      <div
+        onMouseMove="{{ onMouseMove }}"
+        style="
+          position: relative;
+          background: #08090b;
+          color: #e9ebee;
+          font-family: &quot;Inter&quot;, sans-serif;
+          overflow-x: hidden;
+          min-height: 100vh;
+        "
+      >
+        <div
+          style="
+            position: fixed;
+            top: -1px;
+            left: 0px;
+            width: 640px;
+            height: 640px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(
+              circle,
+              rgba(226, 102, 29, 0.06),
+              transparent 70%
+            );
+          "
+        ></div>
+
+        <nav
+          style="position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:10px 48px; background:{{ navBg }}; backdrop-filter:blur(14px); border-bottom:{{ navBorder }}; transition: background 0.4s ease, border-color 0.4s ease;"
+        >
+          <div style="display: flex; align-items: center">
+            <img
+              src="assets/logo-setgen.png"
+              alt="SETGEN"
+              style="height: 84px; width: auto; object-fit: contain"
+            />
+          </div>
+          <div style="display: flex; align-items: center; gap: 36px">
+            <a
+              href="#sobre"
+              style="
+                color: #b8bcc2;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+              "
+              >Sobre</a
+            >
+            <a
+              href="#servicos"
+              style="
+                color: #b8bcc2;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+              "
+              >Serviços</a
+            >
+            <a
+              href="#diferenciais"
+              style="
+                color: #b8bcc2;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+              "
+              >Diferenciais</a
+            >
+            <a
+              href="#contato"
+              style="
+                color: #b8bcc2;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+              "
+              >Contato</a
+            >
+          </div>
+          <a
+            href="{{ whatsappUrl }}"
+            target="_blank"
+            rel="noopener"
+            style="
+              text-decoration: none;
+              padding: 10px 22px;
+              border-radius: 8px;
+              background: #e2661d;
+              color: #100a06;
+              font-weight: 600;
+              font-size: 14px;
+              box-shadow: 0 0 20px rgba(226, 102, 29, 0.35);
+            "
+            >Solicitar orçamento</a
+          >
+        </nav>
+
+        <section
+          style="
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+          "
+        >
+          <img
+            src="assets/hero-fachada.jpeg"
+            alt="Fachada da SETGEN em Manaus"
+            style="
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              z-index: 0;
+            "
+          />
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                180deg,
+                rgba(8, 9, 11, 0.15),
+                rgba(8, 9, 11, 0.3) 55%,
+                #08090b 96%
+              );
+              z-index: 1;
+            "
+          ></div>
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                90deg,
+                rgba(6, 7, 8, 0.88) 0%,
+                rgba(6, 7, 8, 0.75) 38%,
+                rgba(6, 7, 8, 0.25) 62%,
+                transparent 78%
+              );
+              z-index: 1;
+            "
+          ></div>
+
+          <div
+            style="
+              position: relative;
+              z-index: 2;
+              max-width: 1280px;
+              margin: 0 auto;
+              padding: 140px 48px 120px;
+              width: 100%;
+            "
+          >
+            <h1
+              style="
+                font-family: &quot;Space Grotesk&quot;, sans-serif;
+                font-size: clamp(40px, 6vw, 76px);
+                line-height: 1.06;
+                font-weight: 700;
+                max-width: 920px;
+                margin: 0 0 26px;
+                letter-spacing: -1.5px;
+              "
+            >
+              Energia
+              <span
+                style="
+                  background: linear-gradient(90deg, #e2661d, #f4a15c);
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  color: transparent;
+                "
+                >Inteligente</span
+              >
+              para Grandes Operações.
+            </h1>
+
+            <p
+              style="
+                font-size: 19px;
+                line-height: 1.6;
+                color: #9aa0a8;
+                max-width: 600px;
+                margin: 0 0 44px;
+                font-weight: 400;
+              "
+            >
+              Engenharia elétrica, grupos geradores e soluções completas em
+              energia para manter o seu negócio funcionando 24 horas por dia.
+            </p>
+
+            <div style="display: flex; gap: 18px; flex-wrap: wrap">
+              <a
+                href="{{ whatsappUrl }}"
+                target="_blank"
+                rel="noopener"
+                style="
+                  text-decoration: none;
+                  padding: 16px 30px;
+                  border-radius: 10px;
+                  background: #e2661d;
+                  color: #100a06;
+                  font-weight: 700;
+                  font-size: 15.5px;
+                  box-shadow: 0 0 30px rgba(226, 102, 29, 0.4);
+                "
+                >Solicitar orçamento</a
+              >
+              <a
+                href="#servicos"
+                style="
+                  text-decoration: none;
+                  padding: 16px 30px;
+                  border-radius: 10px;
+                  border: 1px solid rgba(255, 255, 255, 0.16);
+                  color: #e9ebee;
+                  font-weight: 600;
+                  font-size: 15.5px;
+                  background: rgba(255, 255, 255, 0.02);
+                "
+                >Conheça nossos serviços</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <section
+          style="
+            padding: 100px 48px 60px;
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+          "
+        >
+          <span
+            style="
+              font-family: &quot;Space Grotesk&quot;, sans-serif;
+              font-size: clamp(16px, 1.8vw, 20px);
+              font-weight: 500;
+              color: #6d7278;
+              letter-spacing: 0.3px;
+              display: block;
+              margin-bottom: 8px;
+            "
+            >Sua operação pode</span
+          >
+          <div
+            style="display: flex; flex-direction: column; align-items: center"
+          >
+            <sc-for list="{{ wordItems }}" as="w" hint-placeholder-count="5">
+              <span
+                data-view="word"
+                style="
+                  display: block;
+                  font-family: &quot;Space Grotesk&quot;, sans-serif;
+                  font-size: clamp(34px, 6vw, 68px);
+                  font-weight: 700;
+                  line-height: 1.3;
+                  letter-spacing: -1px;
+                  color: #d7d9db;
+                  will-change: opacity, transform;
+                "
+                >{{ w }}</span
+              >
+            </sc-for>
+          </div>
+        </section>
+
+        <section
+          id="sobre"
+          ref="{{ aboutRef }}"
+          data-reveal="about"
+          style="
+            position: relative;
+            padding: 160px 48px;
+            max-width: 1280px;
+            margin: 0 auto;
+          "
+        >
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 80px;
+              align-items: center;
+            "
+          >
+            <div style="{{ aboutStyleStr }}">
+              <span
+                style="
+                  font-size: 12.5px;
+                  letter-spacing: 1.6px;
+                  color: #e2661d;
+                  font-weight: 600;
+                  text-transform: uppercase;
+                "
+                >Sobre a SETGEN</span
+              >
+              <h2
+                style="
+                  font-family: &quot;Space Grotesk&quot;, sans-serif;
+                  font-size: clamp(28px, 3.4vw, 42px);
+                  font-weight: 700;
+                  line-height: 1.2;
+                  margin: 18px 0 24px;
+                  letter-spacing: -0.5px;
+                "
+              >
+                Há mais de 10 anos levando energia, segurança e continuidade
+                operacional para empresas em todo o Brasil.
+              </h2>
+              <p style="font-size: 16.5px; line-height: 1.75; color: #9aa0a8">
+                Combinamos engenharia própria, monitoramento de precisão e uma
+                equipe técnica especializada para garantir que grandes operações
+                nunca parem — do projeto elétrico à manutenção contínua de
+                grupos geradores.
+              </p>
+            </div>
+            <div
+              style="{{ aboutStyleStr }} position:relative; aspect-ratio:4/5; border-radius:20px; border:1px solid rgba(255,255,255,0.06); overflow:hidden;"
+            >
+              <img
+                src="assets/sobre-equipe.jpeg"
+                alt="Equipe técnica SETGEN em campo"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  display: block;
+                "
+              />
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="servicos"
+          ref="{{ servicesRef }}"
+          data-reveal="services"
+          style="padding: 140px 48px; max-width: 1280px; margin: 0 auto"
+        >
+          <div
+            style="{{ servicesHeaderStyleStr }} margin-bottom:64px; max-width:620px;"
+          >
+            <span
+              style="
+                font-size: 12.5px;
+                letter-spacing: 1.6px;
+                color: #e2661d;
+                font-weight: 600;
+                text-transform: uppercase;
+              "
+              >Serviços</span
+            >
+            <h2
+              style="
+                font-family: &quot;Space Grotesk&quot;, sans-serif;
+                font-size: clamp(28px, 3.4vw, 40px);
+                font-weight: 700;
+                margin: 16px 0 0;
+                letter-spacing: -0.5px;
+              "
+            >
+              Soluções completas em energia, do projeto à operação.
+            </h2>
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 400px 1fr;
+              gap: 64px;
+              align-items: start;
+            "
+          >
+            <div style="display: flex; flex-direction: column">
+              <sc-for
+                list="{{ servicesList }}"
+                as="svc"
+                hint-placeholder-count="11"
+              >
+                <div
+                  onMouseEnter="{{ svc.activate }}"
+                  onClick="{{ svc.activate }}"
+                  style="cursor:pointer; display:flex; align-items:baseline; gap:18px; padding:18px 4px; border-bottom:1px solid; transition: color 0.3s ease, border-color 0.3s ease; {{ svc.rowStyleStr }}"
+                >
+                  <span
+                    style="font-family:'Space Grotesk',monospace; font-size:13px; letter-spacing:0.5px; transition:color 0.3s ease; {{ svc.numStyleStr }}"
+                    >{{ svc.indexLabel }}</span
+                  >
+                  <span
+                    style="
+                      font-family: &quot;Space Grotesk&quot;, sans-serif;
+                      font-size: 19px;
+                      font-weight: 600;
+                      letter-spacing: -0.2px;
+                    "
+                    >{{ svc.title }}</span
+                  >
+                </div>
+              </sc-for>
+            </div>
+            <div
+              style="
+                position: sticky;
+                top: 120px;
+                min-height: 420px;
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.07);
+                background: linear-gradient(160deg, #121418, #0b0c0e);
+                overflow: hidden;
+              "
+            >
+              <div style="position: relative; width: 100%; height: 280px">
+                <img
+                  src="{{ activeSvc.image }}"
+                  alt="{{ activeSvc.title }}"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                  "
+                />
+                <div
+                  style="
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(
+                      180deg,
+                      rgba(11, 12, 14, 0) 55%,
+                      rgba(11, 12, 14, 0.9) 100%
+                    );
+                  "
+                ></div>
+                <span
+                  style="
+                    position: absolute;
+                    top: 18px;
+                    left: 18px;
+                    font-family: &quot;Space Grotesk&quot;, monospace;
+                    font-size: 13px;
+                    letter-spacing: 0.5px;
+                    color: #e2661d;
+                    background: rgba(8, 9, 11, 0.7);
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                    border: 1px solid rgba(226, 102, 29, 0.3);
+                  "
+                  >{{ activeSvc.indexLabel }}</span
+                >
+              </div>
+              <div style="padding: 36px 44px 44px">
+                <h3
+                  style="
+                    font-family: &quot;Space Grotesk&quot;, sans-serif;
+                    font-size: 28px;
+                    font-weight: 700;
+                    margin: 0 0 14px;
+                    letter-spacing: -0.4px;
+                  "
+                >
+                  {{ activeSvc.title }}
+                </h3>
+                <p
+                  style="
+                    font-size: 16px;
+                    line-height: 1.65;
+                    color: #9aa0a8;
+                    margin: 0;
+                    max-width: 440px;
+                  "
+                >
+                  {{ activeSvc.desc }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          ref="{{ statsRef }}"
+          data-reveal="stats"
+          style="
+            padding: 120px 48px;
+            background: linear-gradient(180deg, #0b0c0e, #0e1013);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          "
+        >
+          <div
+            style="{{ statsStyleStr }} max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:40px; text-align:center;"
+          >
+            <sc-for list="{{ statsData }}" as="s" hint-placeholder-count="4">
+              <div>
+                <div
+                  style="
+                    font-family: &quot;Space Grotesk&quot;, sans-serif;
+                    font-size: clamp(36px, 4.4vw, 56px);
+                    font-weight: 700;
+                    background: linear-gradient(90deg, #f4a15c, #e2661d);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                  "
+                >
+                  {{ s.display }}
+                </div>
+                <div
+                  style="
+                    font-size: 14px;
+                    color: #8b9096;
+                    margin-top: 8px;
+                    letter-spacing: 0.3px;
+                  "
+                >
+                  {{ s.label }}
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section
+          style="
+            padding: 100px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+          "
+        >
+          <div
+            style="
+              max-width: 1280px;
+              margin: 0 auto 40px;
+              padding: 0 48px;
+              text-align: center;
+            "
+          >
+            <span
+              style="
+                font-size: 12.5px;
+                letter-spacing: 1.6px;
+                color: #e2661d;
+                font-weight: 600;
+                text-transform: uppercase;
+              "
+              >Confiança de mais de 400 clientes</span
+            >
+          </div>
+          <div
+            style="
+              position: relative;
+              -webkit-mask-image: linear-gradient(
+                90deg,
+                transparent,
+                #000 8%,
+                #000 92%,
+                transparent
+              );
+              mask-image: linear-gradient(
+                90deg,
+                transparent,
+                #000 8%,
+                #000 92%,
+                transparent
+              );
+            "
+          >
+            <div
+              style="
+                display: flex;
+                gap: 56px;
+                width: max-content;
+                animation: marqueeScroll 28s linear infinite;
+              "
+            >
+              <div style="display: flex; gap: 32px; align-items: center">
+                <sc-for
+                  list="{{ clientLogos }}"
+                  as="c"
+                  hint-placeholder-count="10"
+                >
+                  <div
+                    style="
+                      width: 150px;
+                      height: 70px;
+                      border-radius: 10px;
+                      background: #ffffff;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      flex-shrink: 0;
+                      padding: 14px;
+                    "
+                  >
+                    <img
+                      src="{{ c.image }}"
+                      alt="{{ c.name }}"
+                      style="
+                        max-width: 100%;
+                        max-height: 100%;
+                        object-fit: contain;
+                      "
+                    />
+                  </div>
+                </sc-for>
+              </div>
+              <div
+                style="display: flex; gap: 32px; align-items: center"
+                aria-hidden="true"
+              >
+                <sc-for
+                  list="{{ clientLogos }}"
+                  as="c"
+                  hint-placeholder-count="10"
+                >
+                  <div
+                    style="
+                      width: 150px;
+                      height: 70px;
+                      border-radius: 10px;
+                      background: #ffffff;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      flex-shrink: 0;
+                      padding: 14px;
+                    "
+                  >
+                    <img
+                      src="{{ c.image }}"
+                      alt="{{ c.name }}"
+                      style="
+                        max-width: 100%;
+                        max-height: 100%;
+                        object-fit: contain;
+                      "
+                    />
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="diferenciais"
+          ref="{{ diffRef }}"
+          data-reveal="diff"
+          style="padding: 140px 48px; max-width: 1280px; margin: 0 auto"
+        >
+          <div
+            style="{{ diffHeaderStyleStr }} margin-bottom:64px; max-width:620px;"
+          >
+            <span
+              style="
+                font-size: 12.5px;
+                letter-spacing: 1.6px;
+                color: #e2661d;
+                font-weight: 600;
+                text-transform: uppercase;
+              "
+              >Diferenciais</span
+            >
+            <h2
+              style="
+                font-family: &quot;Space Grotesk&quot;, sans-serif;
+                font-size: clamp(28px, 3.4vw, 40px);
+                font-weight: 700;
+                margin: 16px 0 0;
+                letter-spacing: -0.5px;
+              "
+            >
+              Por que grandes operações confiam na SETGEN.
+            </h2>
+          </div>
+          <div>
+            <sc-for list="{{ diffs }}" as="d" hint-placeholder-count="6">
+              <div
+                data-view="diffrow"
+                style="
+                  display: grid;
+                  grid-template-columns: 60px 1fr 1.4fr;
+                  gap: 32px;
+                  align-items: baseline;
+                  padding: 28px 0;
+                  border-top: 1px solid rgba(255, 255, 255, 0.08);
+                  will-change: opacity, transform;
+                "
+              >
+                <span
+                  style="
+                    font-family: &quot;Space Grotesk&quot;, monospace;
+                    font-size: 13px;
+                    color: #e2661d;
+                  "
+                  >{{ d.indexLabel }}</span
+                >
+                <h3
+                  style="
+                    font-family: &quot;Space Grotesk&quot;, sans-serif;
+                    font-size: 19px;
+                    font-weight: 600;
+                    margin: 0;
+                    letter-spacing: -0.2px;
+                  "
+                >
+                  {{ d.title }}
+                </h3>
+                <p
+                  style="
+                    font-size: 15px;
+                    line-height: 1.6;
+                    color: #8b9096;
+                    margin: 0;
+                  "
+                >
+                  {{ d.desc }}
+                </p>
+              </div>
+            </sc-for>
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.08)"></div>
+          </div>
+        </section>
+
+        <section
+          ref="{{ ctaRef }}"
+          data-reveal="cta"
+          id="contato"
+          style="
+            position: relative;
+            padding: 160px 48px;
+            text-align: center;
+            overflow: hidden;
+          "
+        >
+          <div
+            style="
+              position: absolute;
+              inset: 0;
+              background: radial-gradient(
+                circle at 50% 40%,
+                rgba(226, 102, 29, 0.14),
+                transparent 60%
+              );
+            "
+          ></div>
+          <div
+            style="{{ ctaStyleStr }} position:relative; max-width:760px; margin:0 auto;"
+          >
+            <h2
+              style="
+                font-family: &quot;Space Grotesk&quot;, sans-serif;
+                font-size: clamp(32px, 5vw, 58px);
+                font-weight: 700;
+                letter-spacing: -1px;
+                margin: 0 0 26px;
+              "
+            >
+              Sua operação não pode parar.
+            </h2>
+            <p
+              style="
+                font-size: 17.5px;
+                line-height: 1.65;
+                color: #9aa0a8;
+                margin: 0 0 44px;
+              "
+            >
+              Quando a energia falha, cada segundo importa. A SETGEN entrega
+              soluções inteligentes e confiáveis para manter grandes operações
+              funcionando sem interrupções.
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 18px;
+                justify-content: center;
+                flex-wrap: wrap;
+              "
+            >
+              <a
+                href="{{ whatsappUrl }}"
+                target="_blank"
+                rel="noopener"
+                style="
+                  text-decoration: none;
+                  padding: 16px 32px;
+                  border-radius: 10px;
+                  background: #e2661d;
+                  color: #100a06;
+                  font-weight: 700;
+                  font-size: 15.5px;
+                  box-shadow: 0 0 30px rgba(226, 102, 29, 0.4);
+                "
+                >Solicitar orçamento</a
+              >
+              <a
+                href="{{ whatsappUrl }}"
+                target="_blank"
+                rel="noopener"
+                style="
+                  text-decoration: none;
+                  padding: 16px 32px;
+                  border-radius: 10px;
+                  border: 1px solid rgba(255, 255, 255, 0.16);
+                  color: #e9ebee;
+                  font-weight: 600;
+                  font-size: 15.5px;
+                "
+                >Falar com um especialista</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <footer
+          style="
+            padding: 80px 48px 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: #0a0b0d;
+          "
+        >
+          <div
+            style="
+              max-width: 1280px;
+              margin: 0 auto;
+              display: grid;
+              grid-template-columns: 1.4fr 1fr 1fr 1fr;
+              gap: 48px;
+            "
+          >
+            <div>
+              <div style="margin-bottom: 16px">
+                <img
+                  src="assets/logo-setgen.png"
+                  alt="SETGEN"
+                  style="height: 64px; width: auto; object-fit: contain"
+                />
+              </div>
+              <p
+                style="
+                  font-size: 13.5px;
+                  line-height: 1.7;
+                  color: #75797f;
+                  max-width: 280px;
+                "
+              >
+                Serviços técnicos em geradores de energia, engenharia elétrica e
+                soluções para operações que não podem parar.
+              </p>
+            </div>
+            <div>
+              <h4
+                style="
+                  font-size: 13px;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  color: #6d7278;
+                  margin: 0 0 18px;
+                "
+              >
+                Links rápidos
+              </h4>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <a
+                  href="#sobre"
+                  style="color: #b8bcc2; text-decoration: none; font-size: 14px"
+                  >Sobre</a
+                >
+                <a
+                  href="#servicos"
+                  style="color: #b8bcc2; text-decoration: none; font-size: 14px"
+                  >Serviços</a
+                >
+                <a
+                  href="#diferenciais"
+                  style="color: #b8bcc2; text-decoration: none; font-size: 14px"
+                  >Diferenciais</a
+                >
+                <a
+                  href="#contato"
+                  style="color: #b8bcc2; text-decoration: none; font-size: 14px"
+                  >Contato</a
+                >
+              </div>
+            </div>
+            <div>
+              <h4
+                style="
+                  font-size: 13px;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  color: #6d7278;
+                  margin: 0 0 18px;
+                "
+              >
+                Contato
+              </h4>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <a
+                  href="mailto:comercial@setgen.com.br"
+                  style="color: #b8bcc2; text-decoration: none; font-size: 14px"
+                  >comercial@setgen.com.br</a
+                >
+                <a
+                  href="{{ whatsappUrl }}"
+                  target="_blank"
+                  rel="noopener"
+                  style="color: #b8bcc2; text-decoration: none; font-size: 14px"
+                  >(92) 99299-9999 — WhatsApp</a
+                >
+                <span style="color: #75797f; font-size: 14px"
+                  >R. Secundária 7, 115 - Nova Cidade, Manaus - AM</span
+                >
+              </div>
+            </div>
+            <div>
+              <h4
+                style="
+                  font-size: 13px;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                  color: #6d7278;
+                  margin: 0 0 18px;
+                "
+              >
+                Redes
+              </h4>
+              <div style="display: flex; gap: 12px">
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Instagram"
+                  style="
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                  "
+                >
+                  <div
+                    style="
+                      width: 16px;
+                      height: 16px;
+                      border-radius: 5px;
+                      border: 1.5px solid #b8bcc2;
+                      position: relative;
+                    "
+                  >
+                    <div
+                      style="
+                        position: absolute;
+                        inset: 0;
+                        margin: auto;
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        border: 1.5px solid #b8bcc2;
+                      "
+                    ></div>
+                    <div
+                      style="
+                        position: absolute;
+                        top: -1.5px;
+                        right: -1.5px;
+                        width: 2.5px;
+                        height: 2.5px;
+                        border-radius: 50%;
+                        background: #b8bcc2;
+                      "
+                    ></div>
+                  </div>
+                </a>
+                <a
+                  href="{{ whatsappUrl }}"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="WhatsApp"
+                  style="
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                  "
+                >
+                  <div
+                    style="
+                      width: 16px;
+                      height: 16px;
+                      border-radius: 50% 50% 50% 4px;
+                      border: 1.5px solid #b8bcc2;
+                    "
+                  ></div>
+                </a>
+                <a
+                  href="mailto:comercial@setgen.com.br"
+                  aria-label="Email"
+                  style="
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-decoration: none;
+                  "
+                >
+                  <div
+                    style="
+                      width: 17px;
+                      height: 12px;
+                      border: 1.5px solid #b8bcc2;
+                      border-radius: 2px;
+                      position: relative;
+                      overflow: hidden;
+                    "
+                  >
+                    <div
+                      style="
+                        position: absolute;
+                        top: -1px;
+                        left: -1px;
+                        width: 9px;
+                        height: 9px;
+                        border-right: 1.5px solid #b8bcc2;
+                        border-bottom: 1.5px solid #b8bcc2;
+                        transform: rotate(45deg) translate(1px, -4px);
+                      "
+                    ></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              max-width: 1280px;
+              margin: 56px auto 0;
+              padding-top: 24px;
+              border-top: 1px solid rgba(255, 255, 255, 0.05);
+              display: flex;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 12px;
+            "
+          >
+            <span style="font-size: 12.5px; color: #5c6167"
+              >© 2026 SETGEN Serviços Técnicos. Todos os direitos
+              reservados.</span
+            >
+            <span style="font-size: 12.5px; color: #5c6167"
+              >Política de Privacidade · LGPD</span
+            >
+          </div>
+        </footer>
+      </div>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script>
+      const SERVICES = [
+        { title: 'Automação e Instalação de QTA', desc: 'Otimização e controle de grupos geradores em paralelo via sistema automatizado.', image: 'assets/svc-01.jpeg' },
+        { title: 'Manutenção em Grupos de Geradores', desc: 'Manutenção e supervisão de grupos geradores utilizando um sistema de gerenciamento avançado.', image: 'assets/svc-02.jpeg' },
+        { title: 'Manutenção em Rede BT, MT, AT', desc: 'Cuidado e revisão de redes elétricas de baixa, média e alta tensão com abordagem técnica detalhada.', image: 'assets/svc-03.jpeg' },
+        { title: 'Manutenção em Subestação', desc: 'Supervisão e manutenção de subestações elétricas garantindo eficiência e segurança operacional.', image: 'assets/svc-04.jpeg' },
+        { title: 'Instalação de Painel Solar', desc: 'Instalação, manutenção e financiamento de painel solar.', image: 'assets/svc-05.jpeg' },
+        { title: 'Emissão de Laudo SPDA', desc: 'Manutenção e emissão de laudo do sistema de proteção contra descargas atmosféricas.', image: 'assets/svc-06.jpeg' },
+        { title: 'Manutenção em Sistema de Incêndio', desc: 'Manutenção de todos os tipos de sistema de combate a incêndio.', image: 'assets/svc-07.jpeg' },
+        { title: 'Usinagem, Torno e Solda', desc: 'Serviço completo de usinagem, torneamento e solda.', image: 'assets/svc-08.jpeg' },
+        { title: 'Estruturas Metálicas', desc: 'Modelagem e montagem de estruturas metálicas sob medida.', image: 'assets/svc-09.jpeg' },
+        { title: 'Aluguel de Máquinas e Equipamentos', desc: 'Locação de máquinas e equipamentos comerciais e industriais.', image: 'assets/svc-10.jpeg' },
+        { title: 'Tanques de Combustível', desc: 'Confecção e lavagem de tanques de combustível de grupos geradores.', image: 'assets/svc-11.jpeg' }
+      ];
+      const SCROLL_WORDS = ['Operar.', 'Crescer.', 'Inovar.', 'Proteger.', 'Liderar.'];
+      const CLIENT_LOGOS = [
+        { name: 'Bertolini', image: 'assets/client-bertolini.png' },
+        { name: 'Denso', image: 'assets/client-denso.png' },
+        { name: 'Eldorado', image: 'assets/client-eldorado.png' },
+        { name: 'Latam', image: 'assets/client-latam.png' },
+        { name: 'Aurora EADI', image: 'assets/client-aurora.png' },
+        { name: 'Manaus Plaza', image: 'assets/client-plaza.png' },
+        { name: 'SC Johnson', image: 'assets/client-scjohnson.png' },
+        { name: 'Real', image: 'assets/client-real.png' },
+        { name: 'Super Terminais', image: 'assets/client-superterminais.png' },
+        { name: 'Triumph', image: 'assets/client-triumph.png' }
+      ];
+      const DIFFS = [
+        { title: 'Atendimento 24 horas', desc: 'Equipe de plantão pronta para qualquer emergência, a qualquer hora.' },
+        { title: 'Equipe especializada', desc: 'Técnicos e engenheiros certificados com anos de experiência de campo.' },
+        { title: 'Engenharia própria', desc: 'Projetos desenvolvidos internamente, sem intermediários.' },
+        { title: 'Soluções customizadas', desc: 'Cada operação é única — construímos sob medida.' },
+        { title: 'Tecnologia de monitoramento', desc: 'Plataforma própria de acompanhamento remoto em tempo real.' },
+        { title: 'Alta disponibilidade energética', desc: 'Redundância e planejamento para zero interrupções.' }
+      ];
+
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.wordSectionRef = React.createRef();
+          this.diffSectionRef = React.createRef();
+          this.aboutRef = React.createRef();
+          this.servicesRef = React.createRef();
+          this.statsRef = React.createRef();
+          this.diffRef = React.createRef();
+          this.ctaRef = React.createRef();
+          this.state = {
+            revealed: { about: false, services: false, stats: false, diff: false, cta: false },
+            statsStarted: false,
+            statVals: [0, 0, 0, 0],
+            navScrolled: false,
+            mouse: { x: -300, y: -300 },
+            activeService: 0
+          };
+          this.setActiveService = (i) => this.setState({ activeService: i });
+          this._raf = null;
+          this._observer = null;
+          this.onScroll = () => this.setState({ navScrolled: window.scrollY > 40 });
+          this.onMouseMove = (e) => this.setState({ mouse: { x: e.clientX, y: e.clientY } });
+          this.handleCardMove = (e) => {
+            const el = e.currentTarget;
+            const rect = el.getBoundingClientRect();
+            const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+            const cx = rect.width / 2, cy = rect.height / 2;
+            const dx = (mx - cx) / cx, dy = (my - cy) / cy;
+            el.style.transform = `translate3d(${dx * 6}px, ${dy * 6}px, 0)`;
+          };
+          this.handleCardLeave = (e) => { e.currentTarget.style.transform = 'translate3d(0,0,0)'; };
+        }
+
+        componentDidMount() {
+          this.setupObserver();
+          window.addEventListener('scroll', this.onScroll);
+        }
+
+        componentWillUnmount() {
+          if (this._observer) this._observer.disconnect();
+          window.removeEventListener('scroll', this.onScroll);
+        }
+
+        setupObserver() {
+          this._observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const key = entry.target.dataset.reveal;
+                if (key) {
+                  this.setState(s => ({ revealed: { ...s.revealed, [key]: true } }));
+                  if (key === 'stats' && !this.state.statsStarted) this.startStatsCount();
+                }
+              }
+            });
+          }, { threshold: 0.25 });
+          [this.aboutRef, this.servicesRef, this.statsRef, this.diffRef, this.ctaRef].forEach(r => {
+            if (r.current) this._observer.observe(r.current);
+          });
+        }
+
+        startStatsCount() {
+          this.setState({ statsStarted: true });
+          const targets = [5000, 700, 400, 24];
+          const start = performance.now();
+          const dur = 1500;
+          const step = (now) => {
+            const p = Math.min(1, (now - start) / dur);
+            const ease = 1 - Math.pow(1 - p, 3);
+            this.setState({ statVals: targets.map(v => v * ease) });
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+
+        reveal(key) {
+          const on = this.state.revealed[key];
+          return {
+            opacity: on ? 1 : 0,
+            transform: on ? 'translateY(0)' : 'translateY(28px)',
+            transition: 'opacity 0.9s cubic-bezier(.16,.84,.44,1), transform 0.9s cubic-bezier(.16,.84,.44,1)'
+          };
+        }
+
+        styleToStr(s) {
+          return Object.entries(s).map(([k, v]) => `${k.replace(/[A-Z]/g, m => '-' + m.toLowerCase())}:${v}`).join(';');
+        }
+
+        renderVals() {
+          const stat0 = Math.round(this.state.statVals[0]);
+          const stat1 = Math.round(this.state.statVals[1]);
+          const stat2 = Math.round(this.state.statVals[2]);
+          const stat3 = Math.round(this.state.statVals[3]);
+          return {
+            aboutRef: this.aboutRef,
+            servicesRef: this.servicesRef,
+            statsRef: this.statsRef,
+            diffRef: this.diffRef,
+            ctaRef: this.ctaRef,
+            navBg: this.state.navScrolled ? 'rgba(8,9,11,0.85)' : 'rgba(8,9,11,0.15)',
+            navBorder: this.state.navScrolled ? '1px solid rgba(226,102,29,0.18)' : '1px solid rgba(255,255,255,0.04)',
+            onMouseMove: this.onMouseMove,
+            glowStyleStr: this.styleToStr({ transform: `translate3d(${this.state.mouse.x - 320}px, ${this.state.mouse.y - 320}px, 0)` }),
+            aboutStyleStr: this.styleToStr(this.reveal('about')),
+            servicesHeaderStyleStr: this.styleToStr(this.reveal('services')),
+            statsStyleStr: this.styleToStr(this.reveal('stats')),
+            diffHeaderStyleStr: this.styleToStr(this.reveal('diff')),
+            ctaStyleStr: this.styleToStr(this.reveal('cta')),
+            servicesList: SERVICES.map((s, i) => ({
+              title: s.title,
+              desc: s.desc,
+              image: s.image,
+              indexLabel: String(i + 1).padStart(2, '0'),
+              rowStyleStr: this.styleToStr({
+                color: i === this.state.activeService ? '#eef0f2' : '#6d7278',
+                borderColor: i === this.state.activeService ? 'rgba(226,102,29,0.5)' : 'rgba(255,255,255,0.08)'
+              }),
+              numStyleStr: this.styleToStr({ color: i === this.state.activeService ? '#e2661d' : '#4a4e54' }),
+              activate: () => this.setActiveService(i)
+            })),
+            activeSvc: { ...SERVICES[this.state.activeService], indexLabel: String(this.state.activeService + 1).padStart(2, '0') },
+            statsData: [
+              { display: '+' + stat0, label: 'Manutenções realizadas' },
+              { display: '+' + stat1, label: 'Clientes já atendidos' },
+              { display: '+' + stat2, label: 'Clientes ativos' },
+              { display: stat3 + '/7', label: 'Suporte técnico' }
+            ],
+            clientLogos: CLIENT_LOGOS,
+            wordItems: SCROLL_WORDS,
+            diffs: DIFFS.map((d, i) => ({ ...d, indexLabel: String(i + 1).padStart(2, '0') })),
+            handleCardMove: this.handleCardMove,
+            handleCardLeave: this.handleCardLeave,
+            whatsappUrl: 'https://wa.me/5592992999999?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento'
+          };
+        }
+      }
+    </script>
+  </body>
+</html>
